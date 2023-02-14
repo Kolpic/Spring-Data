@@ -1,0 +1,73 @@
+package com.softuni.exercisejson.domain.entities;
+
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import java.math.BigDecimal;
+import java.util.Set;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "products")
+public class Product extends BaseEntity{
+
+    @Column
+    private String name;
+    @Column
+    private BigDecimal price;
+    @ManyToOne
+    @Fetch(FetchMode.JOIN)
+    private User buyer;
+    @ManyToOne
+    @Fetch(FetchMode.JOIN)
+    private User seller;
+    @ManyToMany
+    @Fetch(FetchMode.JOIN)
+    private Set<Category> categories;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public User getBuyer() {
+        return buyer;
+    }
+
+    public void setBuyer(User buyer) {
+        this.buyer = buyer;
+    }
+
+    public User getSeller() {
+        return seller;
+    }
+
+    public void setSeller(User seller) {
+        this.seller = seller;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
+    }
+}
